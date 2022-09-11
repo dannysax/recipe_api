@@ -4,9 +4,6 @@ from psycopg2 import OperationalError as psycopg2OpError
 from django.db.utils import OperationalError
 
 
-
-
-
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # pass
@@ -15,7 +12,9 @@ class Command(BaseCommand):
             try:
                 self.check(databases=["default"])
                 db_ready = True
-                self.stdout.write(self.style.SUCCESS("database connection successful")) 
+                self.stdout.write(self.style.SUCCESS \ 
+                ("database connection successful")) 
             except (psycopg2OpError, OperationalError):
-                self.stdout.write("Database not ready. Waiting for 1 second")
+                self.stdout.write("Database not ready. \
+                     Waiting for 1 second")
                 time.sleep(1)
