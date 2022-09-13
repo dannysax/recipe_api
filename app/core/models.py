@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager,
-    PermissionsMixin )
+    AbstractBaseUser, BaseUserManager )
 
 class UserManager(BaseUserManager):
     """object manager for user"""
@@ -36,7 +35,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser):
     """User Model"""
     email = models.EmailField(max_length=255, unique=True)
     phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
@@ -51,3 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "user"
         verbose_name_plural = "users"
+
+    def __str__(self):
+        return self.email
