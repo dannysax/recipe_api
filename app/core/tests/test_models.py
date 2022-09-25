@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 class TestUserModels(TestCase):
     """Test user models"""
-
+ 
     def test_create_user_with_email(self):
         email = "example@gmail.com"
         password = "password@123"
@@ -33,11 +33,15 @@ class TestUserModels(TestCase):
             email="",
             password="password@223"
         )
+        self.assertTrue(ValueError)
 
-    def test_create_superuser(self):
+    def test_createsuperuser(self):
         email = "example@gmail.com"
         user = get_user_model().objects.create_superuser(
-            email=email, password="password@12345"
-        )
+               email=email, 
+               password="password@12345"
+               )
+        self.assertTrue(user.is_active)
+        self.assertTrue(user.is_verified)
         self.assertTrue(user.is_staff)
         self.assertTrue(user.is_superuser)
