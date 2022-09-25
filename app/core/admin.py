@@ -26,6 +26,6 @@ class UserAdmin(BaseUserAdmin):
             }),
     )
     readonly_fields = ["last_login"]
-    # list_filter = ["id"]
+    # list_filter = ["id"] 
 
 admin.site.register(User, UserAdmin)
